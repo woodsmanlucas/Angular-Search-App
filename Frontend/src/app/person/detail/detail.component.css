@@ -1,0 +1,20 @@
+.person {
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: cadetblue;
+    width: fit-content;
+    padding: 20px;
+    width: 200px;
+}
+
+details{
+    padding-left: 20px;
+}
+
+img{
+    margin-top: 20px;
+}
+
+.interests{
+    word-wrap: normal;
+}

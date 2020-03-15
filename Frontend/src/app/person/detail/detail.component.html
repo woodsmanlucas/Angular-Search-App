@@ -1,0 +1,11 @@
+<div class="person">
+    <h4>{{person.firstName}} {{person.lastName}}</h4>
+    <details>
+        <summary>All about {{person.firstName}}</summary>
+        <img [src]="person.picture_url" [alt]="person.firstName">
+        <p class="interests">Interests: {{person.interests}}</p>
+        <p>Age: {{person.age}}</p>
+        <Address>{{person.address}}</Address>
+    </details>
+
+</div>
