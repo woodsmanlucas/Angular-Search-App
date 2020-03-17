@@ -1,10 +1,8 @@
-export class Person {
-    constructor(
-        public firstName: string, 
-        public lastName: string, 
-        public address: string, 
-        public interests: string, 
-        public age: number, 
-        public picture_url: string
-        ){}
+export interface Person {
+        firstName: string, 
+        lastName: string, 
+        address: string, 
+        interests: string, 
+        age: number, 
+        picture_url: string
 }

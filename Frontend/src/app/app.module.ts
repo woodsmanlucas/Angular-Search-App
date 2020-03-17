@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-
 import { AppComponent } from './app.component';
+
 import { DetailComponent } from './person/detail/detail.component';
 import { ListComponent } from './person/list/list.component';
+import { PeopleService } from './services/people-service.service'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { ListComponent } from './person/list/list.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [PeopleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
