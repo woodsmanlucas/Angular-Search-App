@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import * as observable from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
 import { Person } from '../model/person'
 
@@ -9,8 +8,6 @@ import { Person } from '../model/person'
   providedIn: 'root'
 })
 export class PeopleService {
-
-  private people: Person[]
 
   constructor(private http: HttpClient) {     
   }
