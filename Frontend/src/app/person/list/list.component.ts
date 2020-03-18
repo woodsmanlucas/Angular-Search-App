@@ -1,24 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import {Person } from '../../model/person'
-import {Observable} from 'rxjs';
+import * as observable from 'rxjs';
 import {PeopleService} from '../../services/people-service.service'
 
 @Component({
   selector: 'app-list',
-  template: `<div class="people">
+  template: `<app-search (onSubmit)="OnSubmit($event)"></app-search> <br/> 
+  <button (click)="seedData()">Seed Data</button>
+  <p *ngIf="loading">Loading</p>
+  <div class="people">
               <app-detail *ngFor="let person of people$ | async"
-                          [person]="person"></app-detail>
+                          [person]="person"
+                          (onDelete)="OnDelete($event)"></app-detail>
                           </div>`,
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
 
-  public people$ : Observable<Person[]>
+  public loading: boolean = true;
+  public people$ : observable.Observable<Person[]>
 
   constructor(private peopleService: PeopleService) { }
 
-  ngOnInit() {
-    this.people$ = this.peopleService.getPeople();
+  async ngOnInit() {
+    this.people$ = await this.peopleService.getPeople()
+    this.loading = false
   }
 
+  seedData(){
+    this.peopleService.seedData()    
+    this.people$ = this.peopleService.getPeople()
+    console.log(this.people$)
+  }
+
+  OnDelete(id: number){
+    this.peopleService.deletePerson(id)
+    this.people$.subscribe(
+      val => this.AssignValues(val.filter(
+        (person) => {return person.personId != id})))
+  }
+
+  OnSubmit(search: string){
+    this.loading = true
+    console.log("inside list; Search value is " + search)
+    this.people$ = observable.of()
+    setTimeout(() => {   
+      this.people$ = this.peopleService.getPeople()
+      this.people$.subscribe(
+        val => this.AssignValues(val.filter(
+          (person) => {return person.firstName.toLowerCase().includes(search) || person.lastName.toLowerCase().includes(search) || person.interests.toLowerCase().includes(search)})))
+  }, 2000)
+     }
+
+  AssignValues(peopleSorted: Person[]){
+    this.people$ = observable.of(peopleSorted)
+    this.loading = false
+  }
 }

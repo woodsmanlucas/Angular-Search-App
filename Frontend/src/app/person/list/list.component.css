@@ -2,3 +2,12 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+button{
+    background-color: blueviolet;
+    border-radius: 5px;
+    border: 2px solid black;
+    color: white;
+    cursor: pointer;
+    line-height: 2em;
+}

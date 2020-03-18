@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { Person } from 'src/app/model/person';
 
 @Component({
@@ -9,9 +9,16 @@ import { Person } from 'src/app/model/person';
 export class DetailComponent implements OnInit {
 
   @Input() public person: Person
+  @Output() private onDelete: EventEmitter<number>;
 
-  constructor() { }
+
+  constructor() {
+    this.onDelete = new EventEmitter<number>();
+   }
 
   ngOnInit(){}
 
+  delete(personId: number){
+    this.onDelete.emit(personId)
+    }
 }

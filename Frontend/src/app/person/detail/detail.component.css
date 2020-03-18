@@ -13,8 +13,13 @@ details{
 
 img{
     margin-top: 20px;
+    width: 150px;
 }
 
 .interests{
     word-wrap: normal;
+}
+
+button{
+    border: 1px solid black;
 }
