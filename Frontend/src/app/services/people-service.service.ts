@@ -28,6 +28,8 @@ export class PeopleService {
   addPerson(person: PersonForm): void{
     let json = JSON.stringify({firstName: person.firstName, lastName: person.lastName, address: person.address, interests: person.interests, age: person.age, picture_url: person.picture_url})
     console.log(json)
-    console.log(fetch('https://angularsearchapp20200317120515.azurewebsites.net/api/people/', { method: 'POST', body: json}));
+    console.log(fetch('https://angularsearchapp20200317120515.azurewebsites.net/api/people/', { method: 'POST',  headers: {
+      'Content-Type': 'application/json',
+    }, body: json}));
   }
 }
