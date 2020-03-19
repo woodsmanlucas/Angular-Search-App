@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Person } from '../../model/person'
 import * as observable from 'rxjs';
 import {PeopleService} from '../../services/people-service.service'
+import { PersonForm } from 'src/app/model/person-form';
 
 @Component({
   selector: 'app-list',
@@ -12,7 +13,8 @@ import {PeopleService} from '../../services/people-service.service'
               <app-detail *ngFor="let person of people$ | async"
                           [person]="person"
                           (onDelete)="OnDelete($event)"></app-detail>
-                          </div>`,
+                          </div>
+                          <app-create (onCreate)="OnCreate($event)" ></app-create>`,
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
@@ -55,5 +57,11 @@ export class ListComponent implements OnInit {
   AssignValues(peopleSorted: Person[]){
     this.people$ = observable.of(peopleSorted)
     this.loading = false
+  }
+
+  OnCreate(model: PersonForm){
+    console.log(model)
+    this.peopleService.addPerson(model);
+    this.people$ = this.peopleService.getPeople();
   }
 }
